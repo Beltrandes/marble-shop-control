@@ -1,6 +1,7 @@
 package br.com.marmoraria.marmoraria.modules.company.controllers;
 
 import br.com.marmoraria.marmoraria.modules.company.dtos.EmployeeDTO;
+import br.com.marmoraria.marmoraria.modules.company.dtos.WithdrawStockItemDTO;
 import br.com.marmoraria.marmoraria.modules.company.errors.InsufficientStockException;
 import br.com.marmoraria.marmoraria.modules.company.services.EmployeeService;
 import br.com.marmoraria.marmoraria.modules.company.services.StockMovementService;
@@ -38,10 +39,10 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeById(employeeId));
     }
 
-    @PutMapping("/{id}/withdraw/{itemId}/{quantity}")
-    public ResponseEntity<String> withdrawStockItem(@PathVariable(name = "itemId") UUID itemId, @PathVariable(name = "quantity") int quantity, @PathVariable(name = "id") UUID employeeId) {
+    @PutMapping("/withdraw")
+    public ResponseEntity<String> withdrawStockItem(@RequestBody WithdrawStockItemDTO withdrawStockItemDTO) {
         try {
-            stockMovementService.employeeSubtractItemQuantity(itemId, quantity, employeeId);
+            stockMovementService.employeeSubtractItemQuantity(withdrawStockItemDTO.stockItemId(), withdrawStockItemDTO.quantity(), withdrawStockItemDTO.employeeId());
             return ResponseEntity.ok("Item withdrawal successfully");
         } catch (InsufficientStockException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Insufficient stock available");

@@ -24,12 +24,12 @@ public class StockItem {
 
     private Integer quantity;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "stockId")
     private Stock stock;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "item")
     private List<StockMovement> movements = new ArrayList<>();
 }

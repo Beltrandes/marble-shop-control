@@ -1,5 +1,6 @@
 package br.com.marmoraria.marmoraria.modules.company.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class Stock {
     private UUID id;
     private String name;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "stock")
     private List<StockItem> items = new ArrayList<>();
 
