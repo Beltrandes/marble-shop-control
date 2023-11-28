@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -37,6 +38,11 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Employee not found");
         }
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeById(employeeId));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EmployeeDTO>> getEmployees() {
+        return ResponseEntity.ok().body(employeeService.getAllEmployees());
     }
 
     @PutMapping("/withdraw")

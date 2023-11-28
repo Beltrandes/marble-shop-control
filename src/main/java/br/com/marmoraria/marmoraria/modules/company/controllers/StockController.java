@@ -7,9 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/stock")
-@CrossOrigin("*")
 public class StockController {
 
     @Autowired
@@ -21,5 +22,10 @@ public class StockController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating stock");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(stockService.createStock(stock));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StockDTO>> getStocks() {
+        return ResponseEntity.ok().body(stockService.getAllStocks());
     }
 }

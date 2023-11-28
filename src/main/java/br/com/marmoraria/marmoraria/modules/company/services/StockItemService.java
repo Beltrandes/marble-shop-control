@@ -25,7 +25,7 @@ public class StockItemService {
     }
 
     public StockItemDTO getStockItemById(UUID itemId) {
-        return stockItemMapper.toDTO(stockItemRepository.findById(itemId).orElseThrow(null));
+        return stockItemMapper.toDTO(stockItemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found with ID: " + itemId)));
     }
 
     public StockItemDTO updateStockItemQuantity(StockItem stockItem, int quantity) {

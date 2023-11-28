@@ -1,5 +1,6 @@
 package br.com.marmoraria.marmoraria.modules.company.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public class Employee {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<StockMovement> movements = new ArrayList<>();
 

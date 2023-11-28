@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -25,5 +26,9 @@ public class EmployeeService {
 
     public EmployeeDTO getEmployeeById(UUID employeeId) {
         return employeeMapper.toDTO(employeeRepository.findById(employeeId).orElseThrow(null));
+    }
+
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeRepository.findAll().stream().map(employeeMapper::toDTO).toList();
     }
 }
