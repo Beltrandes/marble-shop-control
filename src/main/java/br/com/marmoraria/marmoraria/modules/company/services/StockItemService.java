@@ -39,4 +39,9 @@ public class StockItemService {
         }
         return null;
     }
+
+    public void deleteStockItem(UUID stockItemId) {
+        stockItemRepository.delete(stockItemRepository.findById(stockItemId)
+                .orElseThrow(() -> new RuntimeException()));
+    }
 }

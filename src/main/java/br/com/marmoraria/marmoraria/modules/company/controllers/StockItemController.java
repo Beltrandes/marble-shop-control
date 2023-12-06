@@ -26,10 +26,16 @@ public class StockItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getStockItem(@PathVariable @Valid UUID id) {
+    public ResponseEntity<Object> get(@PathVariable @Valid UUID id) {
         if (id == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Stock Item nof found");
         }
         return ResponseEntity.status(HttpStatus.OK).body(stockItemService.getStockItemById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable @Valid UUID id) {
+        stockItemService.deleteStockItem(id);
     }
 }

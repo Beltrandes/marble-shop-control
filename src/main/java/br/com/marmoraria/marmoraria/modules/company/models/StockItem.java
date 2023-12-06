@@ -30,6 +30,6 @@ public class StockItem {
     private Stock stock;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<StockMovement> movements = new ArrayList<>();
 }
