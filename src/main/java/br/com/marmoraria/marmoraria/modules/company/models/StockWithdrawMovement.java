@@ -1,17 +1,15 @@
 package br.com.marmoraria.marmoraria.modules.company.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @Entity
-public class StockMovement {
+public class StockWithdrawMovement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -1,7 +1,7 @@
 package br.com.marmoraria.marmoraria.modules.company.dtos;
 
 import br.com.marmoraria.marmoraria.modules.company.models.Stock;
-import br.com.marmoraria.marmoraria.modules.company.models.StockMovement;
+import br.com.marmoraria.marmoraria.modules.company.models.StockWithdrawMovement;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.NonNull;
@@ -15,7 +15,7 @@ public record StockItemDTO(
         String details,
         @NotNull Integer quantity,
         Stock stock,
-        List<StockMovement> movements
+        List<StockWithdrawMovement> movements
 
 ) {
 }

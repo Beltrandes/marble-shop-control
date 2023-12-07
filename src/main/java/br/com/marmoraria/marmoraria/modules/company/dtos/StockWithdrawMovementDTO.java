@@ -6,7 +6,7 @@ import br.com.marmoraria.marmoraria.modules.company.models.StockItem;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record StockMovementDTO(
+public record StockWithdrawMovementDTO(
         UUID id,
         LocalDateTime movementDate,
         Employee employee,

@@ -20,7 +20,7 @@ public class Employee {
 
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
-    private List<StockMovement> movements = new ArrayList<>();
+    private List<StockWithdrawMovement> movements = new ArrayList<>();
 
 
 }

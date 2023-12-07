@@ -1,8 +1,6 @@
 package br.com.marmoraria.marmoraria.modules.company.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,5 +29,5 @@ public class StockItem {
 
     @JsonIgnore
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<StockMovement> movements = new ArrayList<>();
+    private List<StockWithdrawMovement> movements = new ArrayList<>();
 }

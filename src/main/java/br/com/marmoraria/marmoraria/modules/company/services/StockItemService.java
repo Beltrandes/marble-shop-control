@@ -28,7 +28,7 @@ public class StockItemService {
         return stockItemMapper.toDTO(stockItemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found with ID: " + itemId)));
     }
 
-    public StockItemDTO updateStockItemQuantity(StockItem stockItem, int quantity) {
+    public StockItemDTO withdrawStockItemQuantity(StockItem stockItem, int quantity) {
         if (stockItem != null) {
             var currentQuantity = stockItem.getQuantity();
 
@@ -36,6 +36,14 @@ public class StockItemService {
                 stockItem.setQuantity(currentQuantity - quantity);
                 return stockItemMapper.toDTO(stockItemRepository.save(stockItem));
             }
+        }
+        return null;
+    }
+
+    public StockItemDTO addStockItemQuantity(StockItem stockItem, int quantity) {
+        if (stockItem != null) {
+            stockItem.setQuantity(stockItem.getQuantity() + quantity);
+            return stockItemMapper.toDTO(stockItemRepository.save(stockItem));
         }
         return null;
     }

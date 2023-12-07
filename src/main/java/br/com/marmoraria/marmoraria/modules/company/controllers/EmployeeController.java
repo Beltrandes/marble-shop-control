@@ -4,7 +4,7 @@ import br.com.marmoraria.marmoraria.modules.company.dtos.EmployeeDTO;
 import br.com.marmoraria.marmoraria.modules.company.dtos.WithdrawStockItemDTO;
 import br.com.marmoraria.marmoraria.modules.company.errors.InsufficientStockException;
 import br.com.marmoraria.marmoraria.modules.company.services.EmployeeService;
-import br.com.marmoraria.marmoraria.modules.company.services.StockMovementService;
+import br.com.marmoraria.marmoraria.modules.company.services.StockWithdrawMovementService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @Autowired
-    private StockMovementService stockMovementService;
+    private StockWithdrawMovementService stockWithdrawMovementService;
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody EmployeeDTO employee) {
@@ -48,7 +48,7 @@ public class EmployeeController {
     @PutMapping("/withdraw")
     public ResponseEntity<String> withdrawStockItem(@RequestBody WithdrawStockItemDTO withdrawStockItemDTO) {
         try {
-            stockMovementService.employeeSubtractItemQuantity(withdrawStockItemDTO.stockItemId(), withdrawStockItemDTO.quantity(), withdrawStockItemDTO.employeeId());
+            stockWithdrawMovementService.employeeSubtractItemQuantity(withdrawStockItemDTO.stockItemId(), withdrawStockItemDTO.quantity(), withdrawStockItemDTO.employeeId());
             return ResponseEntity.ok("Item withdrawal successfully");
         } catch (InsufficientStockException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Insufficient stock available");
