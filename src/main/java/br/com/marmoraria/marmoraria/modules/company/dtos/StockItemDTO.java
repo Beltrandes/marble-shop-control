@@ -1,6 +1,7 @@
 package br.com.marmoraria.marmoraria.modules.company.dtos;
 
 import br.com.marmoraria.marmoraria.modules.company.models.Stock;
+import br.com.marmoraria.marmoraria.modules.company.models.StockEntriesMovement;
 import br.com.marmoraria.marmoraria.modules.company.models.StockWithdrawMovement;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,11 +12,12 @@ import java.util.UUID;
 
 public record StockItemDTO(
         UUID id,
-        @NotBlank @NonNull String name,
+        String name,
         String details,
-        @NotNull Integer quantity,
+        Integer quantity,
         Stock stock,
-        List<StockWithdrawMovement> movements
+        List<StockWithdrawMovement> withdrawMovements,
+        List<StockEntriesMovement> entriesMovements
 
 ) {
 }

@@ -2,8 +2,10 @@ package br.com.marmoraria.marmoraria.modules.company.services;
 
 import br.com.marmoraria.marmoraria.modules.company.dtos.StockItemDTO;
 import br.com.marmoraria.marmoraria.modules.company.mappers.StockItemMapper;
+import br.com.marmoraria.marmoraria.modules.company.models.Stock;
 import br.com.marmoraria.marmoraria.modules.company.models.StockItem;
 import br.com.marmoraria.marmoraria.modules.company.repositories.StockItemRepository;
+import br.com.marmoraria.marmoraria.utils.exceptions.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -38,6 +40,17 @@ public class StockItemService {
             }
         }
         return null;
+    }
+
+    public StockItemDTO updateStockItem(UUID stockItemId, StockItemDTO stockItemDTO) {
+        return stockItemRepository.findById(stockItemId)
+                .map(recordFound -> {
+                    recordFound.setName(stockItemDTO.name());
+                    recordFound.setStock(stockItemDTO.stock());
+                    recordFound.setQuantity(stockItemDTO.quantity());
+                    recordFound.setDetails(stockItemDTO.details());
+                    return stockItemMapper.toDTO(stockItemRepository.save(recordFound));
+                }).orElseThrow(() -> new RuntimeException(String.valueOf(stockItemId)));
     }
 
     public StockItemDTO addStockItemQuantity(StockItem stockItem, int quantity) {

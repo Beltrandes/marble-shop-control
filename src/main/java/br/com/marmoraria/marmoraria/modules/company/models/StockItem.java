@@ -29,5 +29,9 @@ public class StockItem {
 
     @JsonIgnore
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<StockWithdrawMovement> movements = new ArrayList<>();
+    private List<StockWithdrawMovement> withdrawMovements = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<StockEntriesMovement> entriesMovements = new ArrayList<>();
 }

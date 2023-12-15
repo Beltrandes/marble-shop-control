@@ -40,7 +40,7 @@ public class StockController {
             stockEntriesMovementService.addStockItemQuantity(addStockItemDTO.stockItemId(), addStockItemDTO.quantity());
             return ResponseEntity.ok().body("Stock item quantity successfully added!");
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro");
         }
     }
 }

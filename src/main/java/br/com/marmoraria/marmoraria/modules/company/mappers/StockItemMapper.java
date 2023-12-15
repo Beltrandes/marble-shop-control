@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class StockItemMapper {
 
     public StockItemDTO toDTO(StockItem item) {
-        return new StockItemDTO(item.getId(), item.getName(), item.getDetails(), item.getQuantity(), item.getStock(), item.getMovements());
+        return new StockItemDTO(item.getId(), item.getName(), item.getDetails(), item.getQuantity(), item.getStock(), item.getWithdrawMovements(), item.getEntriesMovements());
     }
 
     public StockItem toEntity(StockItemDTO itemDTO) {
@@ -20,7 +20,8 @@ public class StockItemMapper {
         item.setDetails(itemDTO.details());
         item.setQuantity(itemDTO.quantity());
         item.setStock(itemDTO.stock());
-        item.setMovements(itemDTO.movements());
+        item.setWithdrawMovements(itemDTO.withdrawMovements());
+        item.setEntriesMovements(itemDTO.entriesMovements());
 
         return item;
     }
